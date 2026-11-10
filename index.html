@@ -1,0 +1,175 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name="theme-color" content="#101112">
+  <meta name="description" content="The personal portfolio of Drew Bianchi.">
+  <title>Drew Bianchi — Portfolio</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=DM+Sans:wght@400;500;600;700&family=Playfair+Display:wght@400;500&display=swap" rel="stylesheet">
+  <style>
+    :root {
+      color-scheme: dark;
+      --ink: #101112;
+      --paper: #f2f1ed;
+      --muted: #a9aaa8;
+      --line: rgba(255, 255, 255, .18);
+      --accent: #c3d6c6;
+      --sans: "DM Sans", sans-serif;
+      --serif: "Playfair Display", Georgia, serif;
+    }
+
+    * { box-sizing: border-box; }
+    html { scroll-behavior: smooth; scroll-padding-top: 82px; }
+    body { margin: 0; background: var(--ink); color: var(--paper); font-family: var(--sans); }
+    a { color: inherit; }
+    a:focus-visible { outline: 2px solid var(--accent); outline-offset: 5px; }
+
+    .nav {
+      position: absolute;
+      z-index: 2;
+      top: 0;
+      left: 0;
+      display: flex;
+      width: 100%;
+      min-height: 78px;
+      align-items: center;
+      justify-content: space-between;
+      padding: 0 clamp(24px, 7vw, 104px);
+      border-bottom: 1px solid rgba(255, 255, 255, .2);
+    }
+    .brand { text-decoration: none; font-size: 15px; font-weight: 700; letter-spacing: .08em; }
+    .nav-links { display: flex; gap: clamp(20px, 4vw, 48px); align-items: center; }
+    .nav-links a { color: rgba(255, 255, 255, .82); font-size: 11px; font-weight: 600; letter-spacing: .16em; text-decoration: none; text-transform: uppercase; transition: color .2s ease; }
+    .nav-links a:hover { color: var(--accent); }
+
+    .masthead {
+      position: relative;
+      display: grid;
+      min-height: min(790px, 100svh);
+      min-height: min(790px, 100vh);
+      align-content: center;
+      overflow: hidden;
+      padding: 140px clamp(24px, 12vw, 180px) 118px;
+      background: #222725 url("https://startbootstrap.github.io/startbootstrap-grayscale/assets/img/bg-masthead.jpg") center 48% / cover no-repeat;
+      isolation: isolate;
+    }
+    .masthead::before { position: absolute; z-index: -1; inset: 0; background: linear-gradient(90deg, rgba(9, 12, 12, .78), rgba(9, 12, 12, .2) 85%), linear-gradient(0deg, rgba(16, 17, 18, .72), transparent 54%); content: ""; }
+    .hero-copy { max-width: 860px; animation: rise-in .85s both; }
+    .eyebrow { margin: 0 0 23px; color: var(--accent); font-size: 10px; font-weight: 700; letter-spacing: .24em; text-transform: uppercase; }
+    h1 { margin: 0; font-size: clamp(54px, 10.5vw, 132px); font-weight: 500; letter-spacing: 0; line-height: .96; }
+    .hero-deck { max-width: 510px; margin: 28px 0 0; color: rgba(255, 255, 255, .82); font-size: clamp(16px, 2vw, 20px); line-height: 1.65; }
+    .hero-link { display: inline-flex; gap: 18px; align-items: center; margin-top: 39px; color: white; font-size: 11px; font-weight: 700; letter-spacing: .17em; text-decoration: none; text-transform: uppercase; }
+    .hero-link span { display: grid; width: 37px; height: 37px; place-items: center; border: 1px solid rgba(255, 255, 255, .65); border-radius: 50%; font-size: 17px; transition: color .2s ease, background .2s ease; }
+    .hero-link:hover span { background: white; color: var(--ink); }
+    .hero-index { position: absolute; right: clamp(24px, 7vw, 104px); bottom: 38px; color: rgba(255, 255, 255, .75); font-size: 10px; letter-spacing: .16em; text-transform: uppercase; }
+
+    .about { display: grid; grid-template-columns: minmax(180px, .7fr) 1.3fr; gap: clamp(40px, 11vw, 160px); padding: 128px clamp(24px, 12vw, 180px) 140px; background: var(--ink); }
+    .section-label { margin: 8px 0 0; color: var(--accent); font-size: 10px; font-weight: 700; letter-spacing: .22em; text-transform: uppercase; }
+    .about h2, .links h2 { max-width: 650px; margin: 0; font-family: var(--serif); font-size: clamp(33px, 5vw, 62px); font-weight: 400; letter-spacing: 0; line-height: 1.19; }
+    .about-copy { max-width: 570px; margin: 24px 0 0; color: var(--muted); font-size: 15px; line-height: 1.9; }
+    .about-signature { display: flex; gap: 16px; align-items: center; margin-top: 34px; }
+    .about-signature img { width: 46px; height: 46px; border-radius: 50%; object-fit: cover; }
+    .about-signature span { color: #e8e8e5; font-size: 12px; font-weight: 600; letter-spacing: .04em; }
+
+    .image-band { position: relative; min-height: 330px; overflow: hidden; background: #464c48 url("https://startbootstrap.github.io/startbootstrap-grayscale/assets/img/demo-image-01.jpg") center / cover no-repeat; }
+    .image-band::after { position: absolute; inset: 0; background: linear-gradient(90deg, rgba(14, 17, 16, .46), rgba(14, 17, 16, .08)); content: ""; }
+    .image-caption { position: absolute; z-index: 1; bottom: 28px; left: clamp(24px, 12vw, 180px); color: rgba(255, 255, 255, .88); font-size: 10px; letter-spacing: .2em; text-transform: uppercase; }
+
+    .links { display: grid; grid-template-columns: minmax(180px, .7fr) 1.3fr; gap: clamp(40px, 11vw, 160px); padding: 120px clamp(24px, 12vw, 180px) 132px; background: var(--paper); color: var(--ink); }
+    .links .section-label { color: #5a705e; }
+    .links h2 { max-width: 520px; }
+    .link-list { margin-top: 30px; border-top: 1px solid rgba(16, 17, 18, .2); }
+    .profile-link { display: flex; min-height: 74px; align-items: center; justify-content: space-between; gap: 20px; border-bottom: 1px solid rgba(16, 17, 18, .2); text-decoration: none; transition: padding .2s ease; }
+    .profile-link:hover { padding-inline: 8px; }
+    .profile-link strong { font-size: 14px; font-weight: 600; }
+    .profile-link span { color: #68706a; font-size: 12px; }
+    .profile-link b { font-size: 17px; font-weight: 400; }
+
+    footer { display: flex; min-height: 104px; align-items: center; justify-content: space-between; gap: 24px; padding: 24px clamp(24px, 7vw, 104px); color: #929492; font-size: 11px; }
+    footer a { color: #d7d9d6; text-decoration: none; }
+    footer a:hover { color: var(--accent); }
+    .footer-links { display: flex; gap: 22px; }
+
+    @keyframes rise-in { from { opacity: 0; transform: translateY(18px); } to { opacity: 1; transform: translateY(0); } }
+    @media (max-width: 640px) {
+      .nav { min-height: 68px; padding-inline: 22px; }
+      .nav-links { gap: 15px; }
+      .nav-links a { font-size: 9px; letter-spacing: .1em; }
+      .masthead { min-height: 690px; min-height: 90svh; padding-inline: 26px; background-position: 58% center; }
+      .masthead::before { background: linear-gradient(90deg, rgba(9, 12, 12, .66), rgba(9, 12, 12, .18)), linear-gradient(0deg, rgba(16, 17, 18, .72), transparent 58%); }
+      h1 { font-size: clamp(51px, 15vw, 82px); }
+      .about, .links { grid-template-columns: 1fr; gap: 25px; padding: 86px 26px 94px; }
+      .about-copy { font-size: 14px; }
+      .image-band { min-height: 250px; }
+      .image-caption { left: 26px; }
+      footer { align-items: flex-start; flex-direction: column; padding: 28px 26px; }
+    }
+    @media (prefers-reduced-motion: reduce) {
+      *, *::before, *::after { scroll-behavior: auto !important; animation-duration: .01ms !important; animation-iteration-count: 1 !important; transition-duration: .01ms !important; }
+    }
+  </style>
+</head>
+<body id="top">
+  <nav class="nav" aria-label="Main navigation">
+    <a class="brand" href="#top" aria-label="Drew Bianchi, home">DB.</a>
+    <div class="nav-links">
+      <a href="#about">About</a>
+      <a href="#links">Around the web</a>
+    </div>
+  </nav>
+
+  <header class="masthead">
+    <div class="hero-copy">
+      <p class="eyebrow">A personal portfolio</p>
+      <h1>Drew<br>Bianchi</h1>
+      <p class="hero-deck">A home for the work, ideas, and things worth sharing.</p>
+      <a class="hero-link" href="#about">Get to know me <span aria-hidden="true">↓</span></a>
+    </div>
+    <span class="hero-index">Personal site · 2026</span>
+  </header>
+
+  <main>
+    <section class="about" id="about" aria-labelledby="about-title">
+      <p class="section-label">01 / A little about me</p>
+      <div>
+        <h2 id="about-title">A space to share what I’m working on.</h2>
+        <p class="about-copy">I’m Drew Bianchi. This site is a growing collection of my work, interests, and new ideas. More to come.</p>
+        <div class="about-signature">
+          <img src="https://avatars.githubusercontent.com/u/283475573?v=4" alt="Drew Bianchi’s GitHub profile photo" width="46" height="46">
+          <span>Drew Bianchi</span>
+        </div>
+      </div>
+    </section>
+
+    <div class="image-band" role="img" aria-label="A quiet stretch of coastline">
+      <span class="image-caption">Somewhere between here and what’s next</span>
+    </div>
+
+    <section class="links" id="links" aria-labelledby="links-title">
+      <p class="section-label">02 / Around the web</p>
+      <div>
+        <h2 id="links-title">Let’s stay connected.</h2>
+        <div class="link-list">
+          <a class="profile-link" href="https://github.com/atbianc1" target="_blank" rel="noopener noreferrer">
+            <strong>GitHub</strong><span>@atbianc1</span><b aria-hidden="true">↗</b>
+          </a>
+          <a class="profile-link" href="https://www.linkedin.com/in/drew-bianchi-500012357/" target="_blank" rel="noopener noreferrer">
+            <strong>LinkedIn</strong><span>Drew Bianchi</span><b aria-hidden="true">↗</b>
+          </a>
+        </div>
+      </div>
+    </section>
+  </main>
+
+  <footer>
+    <span>© 2026 Drew Bianchi</span>
+    <div class="footer-links">
+      <a href="#top">Back to top ↑</a>
+      <a href="https://github.com/atbianc1" target="_blank" rel="noopener noreferrer">GitHub</a>
+    </div>
+  </footer>
+</body>
+</html>
